@@ -615,12 +615,12 @@ git commit -m "Initial project setup: structure, dependencies, GCP config"
 | 8 | Required GCP APIs enabled | ✅ |
 | 9 | Application Default Credentials set | ✅ |
 | 10 | Cloud Storage bucket created | ✅ |
-| 11 | Dataset downloaded and extracted | ☐ |
+| 11 | Dataset downloaded and extracted | ✅ |
 | 12 | `config.yaml` created with GCP settings | ✅ |
 | 13 | Source file skeletons created | ✅ |
 | 14 | Validation notebook created | ✅ |
-| 15 | Vertex AI Experiment created | ☐ |
-| 16 | All 9 CSV files verified present | ☐ |
+| 15 | Vertex AI Experiment created | ✅ |
+| 16 | All 9 CSV files verified present | ✅ |
 | 17 | Initial commit made | ✅ |
 
 ---
