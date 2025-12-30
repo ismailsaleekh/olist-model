@@ -606,22 +606,22 @@ git commit -m "Initial project setup: structure, dependencies, GCP config"
 | # | Task | Status |
 |---|------|--------|
 | 1 | Folder structure created | ✅ |
-| 2 | Git repository initialized | ☐ |
-| 3 | `.gitignore` configured | ☐ |
-| 4 | Python virtual environment created | ☐ |
-| 5 | Dependencies installed | ☐ |
-| 6 | `gcloud` CLI installed and authenticated | ☐ |
-| 7 | GCP project created/selected | ☐ |
-| 8 | Required GCP APIs enabled | ☐ |
-| 9 | Application Default Credentials set | ☐ |
-| 10 | Cloud Storage bucket created | ☐ |
+| 2 | Git repository initialized | ✅ |
+| 3 | `.gitignore` configured | ✅ |
+| 4 | Python virtual environment created | ✅ |
+| 5 | Dependencies installed | ✅ |
+| 6 | `gcloud` CLI installed and authenticated | ✅ |
+| 7 | GCP project created/selected | ✅ |
+| 8 | Required GCP APIs enabled | ✅ |
+| 9 | Application Default Credentials set | ✅ |
+| 10 | Cloud Storage bucket created | ✅ |
 | 11 | Dataset downloaded and extracted | ☐ |
-| 12 | `config.yaml` created with GCP settings | ☐ |
+| 12 | `config.yaml` created with GCP settings | ✅ |
 | 13 | Source file skeletons created | ✅ |
 | 14 | Validation notebook created | ✅ |
 | 15 | Vertex AI Experiment created | ☐ |
 | 16 | All 9 CSV files verified present | ☐ |
-| 17 | Initial commit made | ☐ |
+| 17 | Initial commit made | ✅ |
 
 ---
 
@@ -630,7 +630,7 @@ git commit -m "Initial project setup: structure, dependencies, GCP config"
 | Resource | Name | Purpose |
 |----------|------|---------|
 | Project | `olist-ml-project` | Container for all resources |
-| GCS Bucket | `olist-ml-<unique-id>` | Artifacts, models, data |
+| GCS Bucket | `olist-ml-ismail` | Artifacts, models, data |
 | Vertex AI Experiment | `olist-customer-intelligence` | Track ML experiments |
 
 ---

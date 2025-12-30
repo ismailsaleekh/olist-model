@@ -1,0 +1,46 @@
+# Reproducibility
+random_seed: 42
+
+# ========== GCP Configuration ==========
+gcp:
+  project_id: "olist-ml-project"
+  region: "us-central1"
+  bucket: "olist-ml-ismail"
+
+# Vertex AI Experiments
+vertex_ai:
+  experiment_name: "olist-customer-intelligence"
+  staging_bucket: "gs://olist-ml-ismail/staging"
+
+# Data split configuration
+split:
+  strategy: "time_based"  # Options: random, time_based, customer_based
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+
+# Paths (local)
+paths:
+  raw_data: "data/raw/"
+  processed_data: "data/processed/"
+  splits: "data/splits/"
+  models: "models/"
+
+# Paths (GCS) - for deployment
+gcs_paths:
+  data: "gs://olist-ml-ismail/data/"
+  models: "gs://olist-ml-ismail/models/"
+  artifacts: "gs://olist-ml-ismail/artifacts/"
+
+# Target variable definitions
+targets:
+  classification:
+    name: "is_satisfied"
+    threshold: 4  # review_score >= 4 is satisfied
+  regression:
+    name: "delivery_days"
+
+# Model training
+training:
+  cv_folds: 5
+  n_jobs: -1  # Use all cores
