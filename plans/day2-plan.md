@@ -1007,7 +1007,7 @@ artifacts = download_clustering_artifacts(config, local_dir="models")
 | 18 | Save all artifacts (pipelines, models, data) | ✅ |
 | 19 | Run clustering on Vertex AI (optional cloud execution) | ✅ |
 | 20 | Create notebook 02_feature_engineering.ipynb | ✅ |
-| 21 | Commit code to git | ☐ |
+| 21 | Commit code to git | ✅ |
 
 ---
 
