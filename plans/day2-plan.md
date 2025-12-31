@@ -926,30 +926,88 @@ print("All artifacts saved!")
 
 ---
 
+### Task 19: Run Clustering on Vertex AI (Optional Cloud Execution)
+
+**Objective**: Run the clustering pipeline on Google Cloud's Vertex AI instead of locally
+
+For large datasets or production workloads, run clustering on Vertex AI Custom Training:
+
+**Prerequisites**:
+- GCP project configured (`configs/config.yaml`)
+- Service account with Vertex AI and GCS permissions
+- Customer segments data generated locally (`data/processed/customer_segments.parquet`)
+
+**Files Created for Vertex AI**:
+```
+src/
+├── gcp_utils.py                   # GCS upload/download + Vertex AI job submission
+└── vertex_training.py             # Standalone training script for Vertex AI
+```
+
+**Usage**:
+
+```python
+from src.gcp_utils import load_config, run_clustering_on_vertex_ai, download_clustering_artifacts
+
+# Load configuration
+config = load_config()
+
+# Run clustering on Vertex AI
+# This will: upload data to GCS, submit training job, wait for completion
+job = run_clustering_on_vertex_ai(config, optimal_k=4, sync=True)
+
+# Download trained artifacts from GCS
+artifacts = download_clustering_artifacts(config, local_dir="models")
+```
+
+**Vertex AI Configuration** (from `configs/config.yaml`):
+
+| Setting | Value |
+|---------|-------|
+| Machine Type | `n1-standard-4` (4 vCPUs, 15GB RAM) |
+| Container | `us-docker.pkg.dev/vertex-ai/training/scikit-learn-cpu.1-3:latest` |
+| Output | `gs://olist-ml-ismail/training-output` |
+
+**What Happens on Vertex AI**:
+1. Data loaded from GCS (`gs://bucket/data/customer_segments.parquet`)
+2. K-Means optimal K search (silhouette method)
+3. All 4 clustering algorithms run (K-Means, DBSCAN, Hierarchical, GMM)
+4. Models and artifacts saved to GCS (`gs://bucket/models/`)
+
+**Artifacts Saved to GCS**:
+- `cluster_scaler.joblib` - StandardScaler for clustering features
+- `kmeans_model.joblib` - Final K-Means model
+- `cluster_profiles.json` - Cluster statistics and profiles
+- `clustering_results.json` - Algorithm comparison metrics
+- `customer_segments_clustered.parquet` - Data with cluster labels
+
+---
+
 ## Day 2 Checklist
 
 | # | Task | Status |
 |---|------|--------|
-| 1 | Load processed data from Day 1 | ☐ |
-| 2 | Create RFM features (Recency, Frequency, Monetary) | ☐ |
-| 3 | Create temporal features (hour, day, month, cyclical) | ☐ |
-| 4 | Create geographic features (distance, region) | ☐ |
-| 5 | Create product features (volume, density, price ratios) | ☐ |
-| 6 | Create NLP features (sentiment analysis) | ☐ |
-| 7 | Create payment features | ☐ |
-| 8 | Build sklearn preprocessing pipeline | ☐ |
-| 9 | Feature selection (variance, correlation) | ☐ |
-| 10 | Prepare customer-level clustering data | ☐ |
-| 11 | Implement K-Means clustering | ☐ |
-| 12 | Implement DBSCAN clustering | ☐ |
-| 13 | Implement Hierarchical clustering | ☐ |
-| 14 | Implement Gaussian Mixture Models | ☐ |
-| 15 | Compare clustering algorithms | ☐ |
-| 16 | Profile clusters and assign business labels | ☐ |
-| 17 | Add cluster labels to main datasets | ☐ |
-| 18 | Save all artifacts (pipelines, models, data) | ☐ |
-| 19 | Create notebook 02_feature_engineering.ipynb | ☐ |
-| 20 | Commit code to git | ☐ |
+| 1 | Load processed data from Day 1 | ✅ |
+| 2 | Create RFM features (Recency, Frequency, Monetary) | ✅ |
+| 3 | Create temporal features (hour, day, month, cyclical) | ✅ |
+| 4 | Create geographic features (distance, region) | ✅ |
+| 5 | Create product features (volume, density, price ratios) | ✅ |
+| 6 | Create NLP features (sentiment analysis) | ✅ |
+| 7 | Create payment features | ✅ |
+| 8 | Build sklearn preprocessing pipeline | ✅ |
+| 9 | Feature selection (variance, correlation) | ✅ |
+| 10 | Prepare customer-level clustering data | ✅ |
+| 11 | Implement K-Means clustering | ✅ |
+| 12 | Implement DBSCAN clustering | ✅ |
+| 13 | Implement Hierarchical clustering | ✅ |
+| 14 | Implement Gaussian Mixture Models | ✅ |
+| 15 | Compare clustering algorithms | ✅ |
+| 16 | Profile clusters and assign business labels | ✅ |
+| 17 | Add cluster labels to main datasets | ✅ |
+| 18 | Save all artifacts (pipelines, models, data) | ✅ |
+| 19 | Run clustering on Vertex AI (optional cloud execution) | ✅ |
+| 20 | Create notebook 02_feature_engineering.ipynb | ✅ |
+| 21 | Commit code to git | ☐ |
 
 ---
 

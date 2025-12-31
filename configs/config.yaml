@@ -44,3 +44,20 @@ targets:
 training:
   cv_folds: 5
   n_jobs: -1  # Use all cores
+
+# ========== Vertex AI Training Jobs ==========
+vertex_ai_training:
+  # Machine configuration for custom training jobs
+  machine_type: "n1-highmem-16"  # 16 vCPUs, 104GB RAM - for large-scale clustering
+  # Pre-built sklearn container from Google
+  container_uri: "us-docker.pkg.dev/vertex-ai/training/sklearn-cpu.1-6:latest"
+  # Staging bucket for job artifacts
+  staging_bucket: "gs://olist-ml-ismail/staging"
+  # Output directory for trained models
+  output_dir: "gs://olist-ml-ismail/training-output"
+  # Service account (null uses default compute SA)
+  service_account: null
+  # Training script location in GCS
+  training_script_gcs: "gs://olist-ml-ismail/scripts/vertex_training.py"
+  # Job naming prefix
+  job_prefix: "olist-clustering"
